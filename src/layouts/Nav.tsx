@@ -1,3 +1,9 @@
+import DrawerMobileNavigation from "../components/DrawerMobileNavigation";
+
 export default function Nav() {
-  return <div>Nav</div>;
+  return (
+    <nav>
+      <DrawerMobileNavigation />
+    </nav>
+  );
 }

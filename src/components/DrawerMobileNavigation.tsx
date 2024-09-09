@@ -89,7 +89,7 @@ export default function DrawerMobileNavigation() {
           <ListItemButton>Contact</ListItemButton>
         </List>
         <hr></hr>
-        <div className="toggle-mode">
+        <div className="mode-toggle-container">
           Choose color mode:
           <ModeToggle />
         </div>

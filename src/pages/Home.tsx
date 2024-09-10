@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Typography, Input, Container } from "@mui/joy";
 import { Link } from "react-router-dom";
 import Products from "../components/products/Products";
-import ProductItem from "../components/products/ProductItem";
+import ProductCard from "../components/products/ProductCard";
 import { ApiProduct } from "../types/api";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <Container>
+    <Container disableGutters>
       <Typography level="h1" component="h1" sx={{ mb: 2 }}>
         Products
       </Typography>
@@ -27,7 +27,7 @@ export default function Home() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             {/* Use your ProductItem component here */}
-            <ProductItem product={product} />
+            <ProductCard product={product} />
           </Link>
         )}
       />

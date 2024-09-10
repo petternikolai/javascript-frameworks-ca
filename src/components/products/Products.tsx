@@ -1,5 +1,4 @@
 import { Grid, Container, CircularProgress, Box } from "@mui/joy";
-import ProductItem from "./ProductItem";
 import useApi from "../../hooks/useApi";
 import { ApiProduct, ApiResponse } from "../../types/api";
 
@@ -31,7 +30,7 @@ const Products: React.FC<ProductsProps> = ({ filter, renderProduct }) => {
   );
 
   return (
-    <Container>
+    <Container disableGutters>
       <Grid container spacing={2} sx={{ flexGrow: 1 }}>
         {filteredProducts?.map((product) => (
           <Grid key={product.id} xs={12} sm={6} md={4} lg={3}>

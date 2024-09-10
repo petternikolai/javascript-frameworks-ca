@@ -12,6 +12,10 @@ header {
   height: 60px;
 }
 
+.header-divider {
+  width: 100%;
+}
+
 hr {
   width: 80%;
   border: none;
@@ -51,4 +55,9 @@ footer {
 
 .main {
   flex: 1;
+}
+
+.logo {
+  text-decoration: none;
+  color: inherit;
 }

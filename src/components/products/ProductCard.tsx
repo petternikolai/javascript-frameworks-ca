@@ -8,11 +8,11 @@ import {
 } from "@mui/joy";
 import { ApiProduct } from "../../types/api";
 
-interface ProductItemProps {
+interface ProductCardProps {
   product: ApiProduct;
 }
 
-export default function ProductItem({ product }: ProductItemProps) {
+export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Card variant="outlined" sx={{ height: "100%" }}>
       <AspectRatio ratio="4/3">

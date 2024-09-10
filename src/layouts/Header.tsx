@@ -5,7 +5,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export default function Header() {
   return (
     <header>
-      <Typography level="h1" component="h1">
+      <Typography level="h2" component="h2">
         Ecommerce
       </Typography>
       <div className="cart-icon-container">

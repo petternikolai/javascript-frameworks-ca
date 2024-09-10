@@ -10,9 +10,11 @@ import ModalClose from "@mui/joy/ModalClose";
 import Menu from "@mui/icons-material/Menu";
 import Search from "@mui/icons-material/Search";
 import ModeToggle from "./ModeToggle";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 export default function DrawerMobileNavigation() {
   const [open, setOpen] = React.useState(false);
+  const location = useLocation();
 
   return (
     <React.Fragment>
@@ -85,8 +87,33 @@ export default function DrawerMobileNavigation() {
             "& > div": { justifyContent: "center" },
           }}
         >
-          <ListItemButton sx={{ fontWeight: "lg" }}>Home</ListItemButton>
-          <ListItemButton>Contact</ListItemButton>
+          <ListItemButton
+            component={RouterLink}
+            to="/"
+            onClick={() => setOpen(false)}
+            sx={{
+              justifyContent: "center",
+              fontWeight: location.pathname === "/" ? "bold" : "normal",
+              color: location.pathname === "/" ? "primary.500" : "text.primary",
+            }}
+          >
+            Home
+          </ListItemButton>
+          <ListItemButton
+            component={RouterLink}
+            to="/contact"
+            onClick={() => setOpen(false)}
+            sx={{
+              justifyContent: "center",
+              fontWeight: location.pathname === "/contact" ? "lg" : "normal",
+              color:
+                location.pathname === "/contact"
+                  ? "primary.500"
+                  : "text.primary",
+            }}
+          >
+            Contact
+          </ListItemButton>
         </List>
         <hr></hr>
         <div className="mode-toggle-container">

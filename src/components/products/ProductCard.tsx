@@ -33,11 +33,13 @@ const StarRating = ({ rating }: { rating: number }) => {
 export default function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate();
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent any default navigation
+    navigate(`/product/${product.id}`);
+  };
+
   return (
-    <Box
-      onClick={() => navigate(`/product/${product.id}`)}
-      sx={{ cursor: "pointer" }}
-    >
+    <Box onClick={handleClick} sx={{ cursor: "pointer" }}>
       <Card variant="outlined" sx={{ height: "100%" }}>
         <AspectRatio ratio="4/3">
           <img

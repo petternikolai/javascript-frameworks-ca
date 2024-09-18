@@ -15,6 +15,8 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import useApi from "../hooks/useApi";
 import { ApiProduct } from "../types/api";
+import { useCart } from "../hooks/useCart";
+import { useState, useEffect } from "react";
 
 interface ApiResponse {
   data: ApiProduct;
@@ -28,6 +30,14 @@ export default function Product() {
     error,
     isLoading,
   } = useApi<ApiResponse>(`https://v2.api.noroff.dev/online-shop/${id}`);
+  const { cart, addItem } = useCart();
+  const [isAdded, setIsAdded] = useState(false);
+
+  useEffect(() => {
+    if (cart.some((item) => item.id === id)) {
+      setIsAdded(true);
+    }
+  }, [cart, id]);
 
   if (isLoading) return <Typography level="h2">Loading...</Typography>;
   if (error) return <Typography level="h2">Error: {error}</Typography>;
@@ -39,8 +49,13 @@ export default function Product() {
   const discountPercentage = ((discount / product.price) * 100).toFixed(0);
 
   const handleAddToCart = () => {
-    // Implement add to cart functionality here
-    console.log("Added to cart:", product.title);
+    addItem({
+      id: product.id,
+      title: product.title,
+      price: product.discountedPrice,
+      quantity: 1,
+    });
+    setIsAdded(true);
   };
 
   const StarRating = ({ rating }: { rating: number }) => {
@@ -122,11 +137,12 @@ export default function Product() {
               <Button
                 fullWidth
                 variant="solid"
-                color="primary"
+                color={isAdded ? "success" : "primary"}
                 onClick={handleAddToCart}
+                disabled={isAdded}
                 sx={{ mb: 2 }}
               >
-                Add to Cart
+                {isAdded ? "Already in Cart" : "Add to Cart"}
               </Button>
             </Box>
           </Grid>

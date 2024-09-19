@@ -55,10 +55,9 @@ export default function Cart() {
             variant="outlined"
             color="primary"
             sx={{ mt: 2, width: "100%", height: "50px", borderRadius: "15px" }}
+            onClick={() => navigate("/")}
           >
-            <MuiLink component={RouterLink} to="/" textColor="primary">
-              Continue Shopping
-            </MuiLink>
+            Continue Shopping
           </Button>
         </Box>
       ) : (

@@ -9,7 +9,7 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <Box sx={{ maxWidth: 800, margin: "auto", p: 2 }}>
+    <Box sx={{ maxWidth: "80%", margin: "auto", p: 2 }}>
       <Typography level="h1" component="h1" sx={{ mb: 2 }}>
         Products.
       </Typography>

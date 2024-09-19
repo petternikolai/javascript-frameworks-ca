@@ -1,26 +1,21 @@
-import { useState } from "react";
 import {
   Box,
   Button,
-  Card,
-  Divider,
   List,
   ListItem,
   Typography,
-  IconButton,
-  Input,
-  Snackbar,
+  Select,
+  Option,
 } from "@mui/joy";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useCart } from "../hooks/useCart";
 import { CartItem } from "../types/cart";
 import { useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as MuiLink } from "@mui/joy";
+import React from "react";
 
 export default function Cart() {
   const { cart, updateCart, clearCart } = useCart();
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
 
   const totalAmount = cart.reduce(
@@ -45,7 +40,6 @@ export default function Cart() {
 
   const checkout = () => {
     if (cart.length === 0) {
-      setSnackbarOpen(true);
       return;
     }
     clearCart();
@@ -53,89 +47,123 @@ export default function Cart() {
   };
 
   return (
-    <Box sx={{ maxWidth: 800, margin: "auto", mt: 4, p: 2 }}>
-      <Card variant="outlined" sx={{ p: 3 }}>
-        <Typography level="h1" component="h1">
-          Your Cart
-        </Typography>
-        {cart.length === 0 ? (
-          <Typography level="body-md">Your cart is empty</Typography>
-        ) : (
+    <Box sx={{ maxWidth: 800, margin: "auto", p: 2 }}>
+      {cart.length === 0 ? (
+        <Box>
+          <Typography level="h1">Your cart is empty.</Typography>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ mt: 2, width: "100%", height: "50px", borderRadius: "15px" }}
+          >
+            <MuiLink component={RouterLink} to="/" textColor="primary">
+              Continue Shopping
+            </MuiLink>
+          </Button>
+        </Box>
+      ) : (
+        <>
+          <Typography level="h1" component="h1">
+            Your Cart.
+          </Typography>
+          <hr className="cart-divider" />
           <List>
-            {cart.map((item: CartItem) => (
-              <ListItem
-                key={item.id}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Typography>
-                  {item.title} - ${(item.price * item.quantity).toFixed(2)}
-                </Typography>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <IconButton
-                    onClick={() =>
-                      handleQuantityChange(item.id, item.quantity - 1)
-                    }
+            {cart.map((item: CartItem, index: number) => (
+              <React.Fragment key={item.id}>
+                <ListItem
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 150,
+                      height: 150,
+                      flexShrink: 0,
+                      overflow: "hidden",
+                      borderRadius: 1,
+                    }}
                   >
-                    <RemoveIcon />
-                  </IconButton>
-                  <Input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      handleQuantityChange(item.id, parseInt(e.target.value))
-                    }
-                    sx={{ width: 50, mx: 1 }}
-                    slotProps={{ input: { min: 0 } }}
-                  />
-                  <IconButton
-                    onClick={() =>
-                      handleQuantityChange(item.id, item.quantity + 1)
-                    }
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        objectPosition: "center",
+                        display: "block",
+                      }}
+                    />
+                  </Box>
+                  <Typography level="h4" sx={{ alignSelf: "flex-start" }}>
+                    {item.title}
+                  </Typography>
+                  <Box
+                    alignItems="center"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "100%",
+                    }}
                   >
-                    <AddIcon />
-                  </IconButton>
-                  <IconButton
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <Select
+                        value={item.quantity}
+                        onChange={(_, newValue) =>
+                          handleQuantityChange(item.id, Number(newValue))
+                        }
+                        sx={{ width: 80 }}
+                      >
+                        {[...Array(100)].map((_, i) => (
+                          <Option key={i + 1} value={i + 1}>
+                            {i + 1}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Box>
+                    <Typography level="body-md">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </Typography>
+                  </Box>
+                  <Typography
                     onClick={() => handleRemoveFromCart(item.id)}
                     color="danger"
+                    sx={{ alignSelf: "flex-end" }}
                   >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
-              </ListItem>
+                    <MuiLink>Remove</MuiLink>
+                  </Typography>
+                </ListItem>
+                {index < cart.length - 1 && <hr className="cart-divider" />}
+              </React.Fragment>
             ))}
           </List>
-        )}
-        <Divider sx={{ my: 2 }} />
-        <Typography level="h2" component="p" sx={{ mb: 2 }}>
-          Total: ${totalAmount.toFixed(2)}
-        </Typography>
-        <Button variant="solid" color="primary" onClick={clearCart} fullWidth>
-          Clear Cart
-        </Button>
-        <Button
-          variant="solid"
-          color="success"
-          onClick={checkout}
-          fullWidth
-          sx={{ mt: 2 }}
-        >
-          Checkout
-        </Button>
-      </Card>
-      <Snackbar
-        variant="solid"
-        color="warning"
-        autoHideDuration={3000}
-        open={snackbarOpen}
-        onClose={() => setSnackbarOpen(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-      >
-        Your cart is empty
-      </Snackbar>
+          <hr className="cart-divider" />
+          <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography level="body-md">Subtotal:</Typography>
+              <Typography level="body-md">${totalAmount.toFixed(2)}</Typography>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography level="body-md">Shipping:</Typography>
+              <Typography level="body-md">FREE</Typography>
+            </Box>
+            <hr className="cart-divider-less-margin" />
+            <Typography level="h3">Total: ${totalAmount.toFixed(2)}</Typography>
+            <Button
+              variant="solid"
+              color="primary"
+              onClick={checkout}
+              fullWidth
+              sx={{ mt: 2 }}
+            >
+              Checkout
+            </Button>
+          </Box>
+        </>
+      )}
     </Box>
   );
 }

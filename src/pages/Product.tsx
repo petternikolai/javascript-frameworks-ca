@@ -54,6 +54,7 @@ export default function Product() {
       title: product.title,
       price: product.discountedPrice,
       quantity: 1,
+      image: product.image.url,
     });
     setIsAdded(true);
   };

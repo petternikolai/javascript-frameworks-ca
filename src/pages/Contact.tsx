@@ -46,9 +46,9 @@ export default function Contact() {
   };
 
   return (
-    <Box sx={{ maxWidth: 500, margin: "auto", mt: 4, p: 2 }}>
+    <Box sx={{ maxWidth: 500, margin: "auto", p: 2 }}>
       <Typography level="h1" component="h1" sx={{ mb: 2 }}>
-        Contact Us
+        Contact Us.
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl error={!!errors.fullName} sx={{ mb: 2 }}>

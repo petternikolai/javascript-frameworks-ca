@@ -17,7 +17,7 @@ export default function Header() {
       <header>
         <Typography level="h2" component="h2">
           <Link to="/" className="logo">
-            ReactCart
+            ReactCart.
           </Link>
         </Typography>
         <div className="cart-icon-container">

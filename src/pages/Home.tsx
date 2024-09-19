@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Typography, Input, Container } from "@mui/joy";
+import { Typography, Input, Box } from "@mui/joy";
 import { Link } from "react-router-dom";
 import Products from "../components/products/Products";
 import ProductCard from "../components/products/ProductCard";
@@ -9,9 +9,9 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
-    <Container disableGutters>
+    <Box sx={{ maxWidth: 800, margin: "auto", p: 2 }}>
       <Typography level="h1" component="h1" sx={{ mb: 2 }}>
-        Products
+        Products.
       </Typography>
       <Input
         placeholder="Search products..."
@@ -31,6 +31,6 @@ export default function Home() {
           </Link>
         )}
       />
-    </Container>
+    </Box>
   );
 }

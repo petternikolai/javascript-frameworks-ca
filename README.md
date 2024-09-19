@@ -5,9 +5,11 @@ A React-based shopping cart application built with TypeScript, Vite, and Materia
 ## Features
 
 - Browse products
+- Search products
 - Add items to cart
 - Adjust quantities in cart
 - Remove items from cart
+- Form validation
 - Responsive design
 
 ## Technologies

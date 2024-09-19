@@ -10,7 +10,6 @@ import {
 import { useCart } from "../hooks/useCart";
 import { CartItem } from "../types/cart";
 import { useNavigate } from "react-router-dom";
-import { Link as RouterLink } from "react-router-dom";
 import { Link as MuiLink } from "@mui/joy";
 import React from "react";
 

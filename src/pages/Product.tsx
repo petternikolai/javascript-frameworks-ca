@@ -19,6 +19,7 @@ import { useCart } from "../hooks/useCart";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { CircularProgress } from "@mui/joy";
 
 interface ApiResponse {
   data: ApiProduct;
@@ -43,8 +44,18 @@ export default function Product() {
     }
   }, [cart, id]);
 
-  if (isLoading) return <Typography level="h2">Loading...</Typography>;
-  if (error) return <Typography level="h2">Error: {error}</Typography>;
+  if (isLoading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  if (error) return <div>Error: {error}</div>;
   if (!response) return <Typography level="h2">No product found</Typography>;
 
   const product = response.data;

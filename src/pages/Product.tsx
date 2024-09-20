@@ -17,6 +17,8 @@ import useApi from "../hooks/useApi";
 import { ApiProduct } from "../types/api";
 import { useCart } from "../hooks/useCart";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface ApiResponse {
   data: ApiProduct;
@@ -32,6 +34,8 @@ export default function Product() {
   } = useApi<ApiResponse>(`https://v2.api.noroff.dev/online-shop/${id}`);
   const { cart, addItem } = useCart();
   const [isAdded, setIsAdded] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (cart.some((item) => item.id === id)) {
@@ -74,7 +78,10 @@ export default function Product() {
   };
 
   return (
-    <Box sx={{ maxWidth: 1000, margin: "auto", mt: 4, p: 2 }}>
+    <Box sx={{ maxWidth: 1000, margin: "auto", p: 2 }}>
+      <Button variant="outlined" onClick={() => navigate(-1)} sx={{ mb: 2 }}>
+        {<ArrowBackIcon />} Go Back
+      </Button>
       <Card variant="outlined">
         <Grid container spacing={2}>
           <Grid xs={12} md={6}>

@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import { CartProvider } from "./contexts/CartContext";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </Layout>
       </CartProvider>

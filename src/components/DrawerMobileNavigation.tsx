@@ -79,6 +79,19 @@ export default function DrawerMobileNavigation() {
           >
             Contact
           </ListItemButton>
+          <ListItemButton
+            component={RouterLink}
+            to="/about"
+            onClick={() => setOpen(false)}
+            sx={{
+              justifyContent: "center",
+              fontWeight: location.pathname === "/cart" ? "lg" : "normal",
+              color:
+                location.pathname === "/cart" ? "primary.500" : "text.primary",
+            }}
+          >
+            About
+          </ListItemButton>
         </List>
         <hr></hr>
         <div className="mode-toggle-container">

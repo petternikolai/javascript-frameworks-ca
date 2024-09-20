@@ -46,7 +46,7 @@ export default function Cart() {
   };
 
   return (
-    <Box sx={{ maxWidth: 800, margin: "auto", p: 2 }}>
+    <Box sx={{ maxWidth: "1000px", margin: "auto", p: 2 }}>
       {cart.length === 0 ? (
         <Box>
           <Typography level="h1">Your cart is empty.</Typography>

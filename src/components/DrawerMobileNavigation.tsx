@@ -7,12 +7,31 @@ import ListItemButton from "@mui/joy/ListItemButton";
 import Typography from "@mui/joy/Typography";
 import ModalClose from "@mui/joy/ModalClose";
 import Menu from "@mui/icons-material/Menu";
-import ModeToggle from "./ModeToggle";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Switch } from "@mui/joy";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useColorScheme } from "@mui/joy/styles";
+import { useState, useEffect } from "react";
 
 export default function DrawerMobileNavigation() {
   const [open, setOpen] = React.useState(false);
   const location = useLocation();
+
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const handleThemeToggle = () => {
+    setMode(mode === "light" ? "dark" : "light");
+  };
 
   return (
     <React.Fragment>
@@ -94,10 +113,13 @@ export default function DrawerMobileNavigation() {
           </ListItemButton>
         </List>
         <hr></hr>
-        <div className="mode-toggle-container">
-          Choose color mode:
-          <ModeToggle />
-        </div>
+        <Switch
+          startDecorator={<LightModeIcon />}
+          endDecorator={<DarkModeIcon />}
+          checked={mode === "dark"}
+          onChange={handleThemeToggle}
+          sx={{ mt: 2, ml: 2, mr: 2 }}
+        />
       </Drawer>
     </React.Fragment>
   );

@@ -161,7 +161,7 @@ export default function Product() {
                 disabled={isAdded}
                 sx={{ mb: 2 }}
               >
-                {isAdded ? "Already in Cart" : "Add to Cart"}
+                {isAdded ? "Added to Cart" : "Add to Cart"}
               </Button>
             </Box>
           </Grid>

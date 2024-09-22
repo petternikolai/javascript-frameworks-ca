@@ -37,32 +37,3 @@ function useApi<T>(url: string): ApiResponse<T> {
 }
 
 export default useApi;
-
-// EXAMPLE USAGE
-// import React from 'react';
-// import useApi from './useApi';
-
-// function ExampleComponent() {
-//   const { data, isLoading, error } = useApi('https://api.example.com/data');
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   if (error) {
-//     return <div>Error: {error}</div>;
-//   }
-
-//   return (
-//     <div>
-//       <h1>Data from API</h1>
-//       <ul>
-//         {data.map(item => (
-//           <li key={item.id}>{item.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// export default ExampleComponent;

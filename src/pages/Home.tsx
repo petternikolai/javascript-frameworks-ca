@@ -26,7 +26,6 @@ export default function Home() {
             to={`/product/${product.id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            {/* Use your ProductItem component here */}
             <ProductCard product={product} />
           </Link>
         )}

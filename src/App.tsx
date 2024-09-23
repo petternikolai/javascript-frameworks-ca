@@ -7,23 +7,26 @@ import Cart from "./pages/Cart";
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import { CartProvider } from "./contexts/CartContext";
 import About from "./pages/About";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
-    <Router>
-      <CartProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<Product />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout-success" element={<CheckoutSuccess />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </Layout>
-      </CartProvider>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <CartProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout-success" element={<CheckoutSuccess />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </Layout>
+        </CartProvider>
+      </Router>
+    </HelmetProvider>
   );
 }
 
